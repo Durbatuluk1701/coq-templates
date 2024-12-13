@@ -37,6 +37,13 @@ jobs:
 {{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
 {{=<% %>=}}
           custom_image: ${{ matrix.image }}
+<%# sldg_dev_pkgs_needed %>
+          before_install: |
+            startGroup "Setup and print opam config"
+              opam repo -a --set-default add ku-sldg-repo https://aromatisse.ittc.ku.edu
+              opam config list; opam repo list; opam list
+            endGroup
+<%/ sldg_dev_pkgs_needed %>
 <%# ci_extra_dev %>
           before_install: |
             startGroup "Setup and print opam config"

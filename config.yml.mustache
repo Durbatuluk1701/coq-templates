@@ -29,6 +29,9 @@ jobs:
     - run:
         name: Install dependencies
         command: |
+{{# sldg_dev_pkgs_needed }}
+          opam repo -a --set-default add ku-sldg-repo https://aromatisse.ittc.ku.edu
+{{/ sldg_dev_pkgs_needed }}
 {{# ci_extra_dev }}
           opam repo -a --set-default add coq-extra-dev https://coq.inria.fr/opam/extra-dev
 {{/ ci_extra_dev }}

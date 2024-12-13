@@ -280,12 +280,12 @@ fields:
         date, for inclusion in the opam-coq-archive.
       used:
         - coq.opam
-  - namespace:
-      required: false
-      used:
-        - README.md
-        - coq.opam
-        - dune
+  # - namespace:
+  #     required: false
+  #     used:
+  #       - README.md
+  #       - coq.opam
+  #       - dune
   - publications:
       type: list
       item_fields:
@@ -378,8 +378,8 @@ fields:
                     https://github.com/coq-community/docker-coq/wiki#supported-tags
                     Quote the strings, otherwise '8.10' becomes '8.1'.
                   examples:
-                    - '8.11'
-                    - 'dev'
+                    - "8.11"
+                    - "dev"
             used:
               - .travis.yml
   - documentation:
@@ -459,16 +459,16 @@ fields:
               https://github.com/coq-community/docker-coq/wiki#supported-tags
               Quote the strings, otherwise '8.10' becomes '8.1'.
             examples:
-              - '8.11'
-              - 'dev'
+              - "8.11"
+              - "dev"
         - repo:
             required: false
             description: >
               Docker repository supporting the given docker tag.
               Defaults to 'coqorg/coq'.
             examples:
-              - 'mathcomp/mathcomp'
-              - 'mathcomp/mathcomp-dev'
+              - "mathcomp/mathcomp"
+              - "mathcomp/mathcomp-dev"
             used:
               - .travis.yml
               - docker-action.yml
@@ -488,8 +488,8 @@ fields:
         generate a daily schedule starting at a random night-time
         minute.
       examples:
-        - '5 4 * * *'  # daily at 4:05
-        - '5 4 * * 0'  # at 04:05 on Sunday
+        - "5 4 * * *" # daily at 4:05
+        - "5 4 * * 0" # at 04:05 on Sunday
       used:
         - docker-action.yml
         - nix-action.yml

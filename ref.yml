@@ -80,10 +80,22 @@ fields:
         - config.yml
         - .travis.yml
         - docker-action.yml
-  - ci_extra_dev:
-      type: bool
-      description: >
-        Set to true to use opam packages from the extra-dev repository.
+  - ci_extra_repos:
+      type: list
+      item_fields:
+        - description:
+            required: true
+            used:
+              - README.md
+        - name:
+            required: true
+            used:
+              - README.md
+        - url:
+            required: true
+            used:
+              - coq.opam
+              - extracted.opam
       used:
         - docker-action.yml
         - config.yml
@@ -285,12 +297,6 @@ fields:
         date, for inclusion in the opam-coq-archive.
       used:
         - coq.opam
-  # - namespace:
-  #     required: false
-  #     used:
-  #       - README.md
-  #       - coq.opam
-  #       - dune
   - publications:
       type: list
       item_fields:

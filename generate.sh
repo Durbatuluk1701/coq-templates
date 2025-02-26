@@ -57,6 +57,15 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
+        ocaml_plugin)
+            mustache='{{ ocaml_plugin }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                mkdir -p -v src && target="src/$target"
+            else
+                continue
+            fi
+            ;;
         index.md)
             mustache='{{ coqdoc }}'
             bool=$(get_yaml meta.yml <<<"$mustache")

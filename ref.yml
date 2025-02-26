@@ -118,6 +118,11 @@ fields:
       used:
         - README.md
         - coq.opam
+  - ocaml_plugin:
+      type: bool
+      used:
+        - README.md
+        - coq.opam
   - doi:
       required: false
       used:

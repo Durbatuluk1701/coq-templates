@@ -58,6 +58,7 @@ for f in "$srcdir"/{,.}*.mustache; do
             fi
             ;;
         ocaml_plugin)
+            echo "Generating ocaml_plugin files"
             mustache='{{ ocaml_plugin }}'
             bool=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$bool" ] && [ "$bool" != false ]; then

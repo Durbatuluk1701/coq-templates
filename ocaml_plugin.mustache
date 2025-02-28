@@ -2,7 +2,7 @@
 ; Follow the instructions on https://github.com/coq-community/templates to regenerate.
 
 (library
- (name {{ ocaml_plugin_name }})
+ (name coq_{{ shortname }})
  (public_name {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.plugin)
  (synopsis "{{& synopsis }}")
  (flags (:standard -w -9-27))

@@ -4,5 +4,5 @@
 (coq.theory
  (name {{ shortname }})
  (package {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }})
- {{# ocaml_plugin }}{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.plugin{{/ ocaml_plugin }}
+ {{# ocaml_plugin }}(plugins {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.plugin){{/ ocaml_plugin }}
  (synopsis "{{& synopsis }}"))

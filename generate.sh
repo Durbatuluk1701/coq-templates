@@ -63,6 +63,10 @@ for f in "$srcdir"/{,.}*.mustache; do
             bool=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$bool" ] && [ "$bool" != false ]; then
                 mkdir -p -v src && target="src/dune"
+                shortname=$(get_yaml meta.yml <<<"{{ shortname }}")
+                if [ -n "$shortname" ]; then
+                    touch "src/coq_$shortname.mlpack"
+                fi
             else
                 continue
             fi

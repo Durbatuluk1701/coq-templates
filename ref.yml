@@ -135,6 +135,22 @@ fields:
       used:
         - README.md
         - coq.opam
+        - ocaml_plugin.mustache
+        - dune.mustache
+  - ocaml_libraries:
+      type: list
+      item_fields:
+        - name:
+            required: true
+      used:
+        - ocaml_plugin.mustache
+  - ocaml_coq_pp_files:
+      type: list
+      item_fields:
+        - name:
+            required: true
+      used:
+        - ocaml_plugin.mustache
   - doi:
       required: false
       used:

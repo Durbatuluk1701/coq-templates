@@ -3,9 +3,12 @@
 
 (library
  (name {{ ocaml_plugin_name }})
- (public_name {{ }} )
+ (public_name {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.plugin)
  (synopsis "{{& synopsis }}")
  (flags (:standard -w -9-27))
- (libraries {{ }})
+ (libraries{{# ocaml_libraries }} {{ name }}{{/ ocaml_libraries}})
  (modules (:standard))
 )
+{{# ocaml_coq_pp_files }}
+(coq.pp (modules{{# ocaml_coq_pp_files }} {{ name }}{{/ ocaml_coq_pp_files}}))
+{{/ ocaml_coq_pp_files }}

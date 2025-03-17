@@ -20,6 +20,12 @@ fields:
         - config.yml
         - dune
         - dune-project
+  - lib-name:
+      required: true
+      description: >
+        The name of the library utilized for import/export by Rocq.
+      used:
+        - _CoqProject.mustache
   - branch:
       required: false
       description: >

@@ -26,6 +26,7 @@ fields:
         The name of the library utilized for import/export by Rocq.
       used:
         - _CoqProject.mustache
+        - dune.mustache
   - branch:
       required: false
       description: >

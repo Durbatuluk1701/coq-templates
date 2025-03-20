@@ -20,7 +20,7 @@ fields:
         - config.yml
         - dune
         - dune-project
-  - lib-name:
+  - lib_name:
       required: true
       description: >
         The name of the library utilized for import/export by Rocq.
@@ -295,9 +295,12 @@ fields:
             fields:
               - name:
                   required: true
+              - lib_name:
+                  required: false
               - version
             used:
               - coq.opam
+              - dune.mustache
               - extracted.opam
   - categories:
       required: false

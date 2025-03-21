@@ -129,5 +129,5 @@ for f in "$srcdir"/{,.}*.mustache; do
 	continue
     fi
     echo "Generating $target..."
-    mustache -e meta.yml "$f" > "$target"
+    mustache meta.yml "$f" > "$target"
 done

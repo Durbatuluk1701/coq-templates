@@ -158,6 +158,13 @@ fields:
             required: true
       used:
         - ocaml_plugin.mustache
+  - coq_menhir_files:
+      type: list
+      item_fields:
+        - target_file_name: # This should be whatever .v file you want generated!
+            required: true
+      used:
+        - dune.mustache
   - doi:
       required: false
       used:

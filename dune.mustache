@@ -4,7 +4,7 @@
 (coq.theory
  (name {{ lib_name }})
  (package {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }})
- (theories{{# dependencies }}{{# opam.lib_name }} {{ lib_name }}{{/ opam.lib_name }}{{/ dependencies }})
+ (theories{{# dependencies }}{{# opam.lib_name }} {{ opam.lib_name }}{{/ opam.lib_name }}{{/ dependencies }})
  {{# ocaml_plugin }}(plugins {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.plugin){{/ ocaml_plugin }}
  (synopsis "{{& synopsis }}"))
 

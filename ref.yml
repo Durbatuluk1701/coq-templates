@@ -144,6 +144,11 @@ fields:
         - coq.opam
         - ocaml_plugin.mustache
         - dune.mustache
+  - coq_trans_deps_workaround:
+      type: bool
+      used:
+        - dune-project.mustache
+        - dune.mustache
   - ocaml_libraries:
       type: list
       item_fields:

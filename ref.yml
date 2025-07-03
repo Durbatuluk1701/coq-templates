@@ -156,7 +156,7 @@ fields:
             required: true
       used:
         - ocaml_plugin.mustache
-  - ocaml_coq_pp_files:
+  - ocaml_rocq_pp_files:
       type: list
       item_fields:
         - name:

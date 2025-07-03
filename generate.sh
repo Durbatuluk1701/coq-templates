@@ -65,7 +65,7 @@ for f in "$srcdir"/{,.}*.mustache; do
                 mkdir -p -v src && target="src/dune"
                 shortname=$(get_yaml meta.yml <<<"{{ shortname }}")
                 if [ -n "$shortname" ]; then
-                    touch "src/coq_$shortname.mlpack"
+                    touch "src/rocq_$shortname.mlpack"
                 fi
             else
                 continue

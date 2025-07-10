@@ -87,6 +87,12 @@ fields:
         - config.yml
         - .travis.yml
         - docker-action.yml
+  - ci_cache_docker_images:
+      type: bool
+      description: >
+        Set to true to enable caching of Docker images used in CI workflows. When enabled, the workflow will use the GitHub Actions cache to store and restore Docker images, reducing the need to pull them from remote registries on every run. This can significantly speed up CI jobs that use large or frequently reused images. The cache is keyed on the image name and tag, and is restored before the build step. If false or omitted, no Docker image caching is performed.
+      used:
+        - docker-action.yml
   - ci_extra_repos:
       type: list
       item_fields:

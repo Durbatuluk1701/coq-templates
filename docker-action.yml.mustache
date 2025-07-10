@@ -1,15 +1,17 @@
+{{! Change delimiters to avoid '${{ variable \}\}' being parsed as mustache syntax. }}
+{{=<% %>=}}
 # This file was generated from `meta.yml`, please do not edit manually.
 # Follow the instructions on https://github.com/coq-community/templates to regenerate.
 name: Docker CI
 
 on:
-  {{# ci_cron_schedule }}
+  <%# ci_cron_schedule %>
   schedule:
-    - cron: '{{ ci_cron_schedule }}'
-  {{/ ci_cron_schedule }}
+    - cron: '<% ci_cron_schedule %>'
+  <%/ ci_cron_schedule %>
   push:
     branches:
-      - {{branch}}{{^branch}}master{{/branch}}
+      - <% branch %><%^ branch %>master<%/ branch %>
   pull_request:
     branches:
       - '**'
@@ -21,24 +23,35 @@ jobs:
     strategy:
       matrix:
         image:
-{{# tested_coq_opam_versions }}
-          - '{{ repo }}{{^ repo }}coqorg/coq{{/ repo }}:{{ version }}'
-{{/ tested_coq_opam_versions }}
-{{# tested_rocq_opam_versions }}
-          - '{{ repo }}{{^ repo }}rocq/rocq-prover{{/ repo }}:{{ version }}'
-{{/ tested_rocq_opam_versions }}
+<%# tested_coq_opam_versions %>
+          - '<% repo %><%^ repo %>coqorg/coq<%/ repo %>:<% version %>'
+<%/ tested_coq_opam_versions %>
+<%# tested_rocq_opam_versions %>
+          - '<% repo %><%^ repo %>rocq/rocq-prover<%/ repo %>:<% version %>'
+<%/ tested_rocq_opam_versions %>
       fail-fast: false
     steps:
+<%# ci_cache_docker_images %>
+      - name: Restore Docker image from cache
+        id: docker-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.docker-cache
+          key: docker-image-${{ matrix.image }}
+      - name: Load Docker image from cache
+        if: steps.docker-cache.outputs.cache-hit == 'true'
+        run: |
+          mkdir -p /tmp/.docker-cache
+          docker load -i /tmp/.docker-cache/image.tar || echo "No cached image to load."
+<%/ ci_cache_docker_images %>
       - uses: actions/checkout@v4
-{{# submodule }}
+<%# submodule %>
         with:
           submodules: recursive
-{{/ submodule }}
+<%/ submodule %>
       - uses: coq-community/docker-coq-action@v1
         with:
-          opam_file: '{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.opam'
-{{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
-{{=<% %>=}}
+          opam_file: '<% opam_name %><%^ opam_name %>coq-<% shortname %><%/ opam_name %>.opam'
           custom_image: ${{ matrix.image }}
           before_install: |
             startGroup "Setup and print opam config"
@@ -60,6 +73,17 @@ jobs:
             endGroup
 <%/ ci_test_dependants %>
 <%& action_appendix %>
+
+<%# ci_cache_docker_images %>
+      - name: Save Docker image to cache
+        if: steps.docker-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p /tmp/.docker-cache
+          docker save ${{ matrix.image }} -o /tmp/.docker-cache/image.tar || echo "Failed to save image."
+        # Only save the image if it was not restored from cache
+        # The cache will be updated for future runs
+        # Note: actions/cache@v4 will automatically upload the cache at the end of the job
+<%/ ci_cache_docker_images %>
 
 # See also:
 # https://github.com/coq-community/docker-coq-action#readme
